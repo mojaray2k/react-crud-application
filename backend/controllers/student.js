@@ -26,7 +26,14 @@ const getStudents = async (req, res) => {
   res.json(students);
 };
 
-const enroll = (req, res) => {
+const getStudent = (req, res) => {
+  Student.findById(req.params.id, function (err, student) {
+    if (err) return next(err);
+    res.send(student);
+  });
+};
+
+const enrollStudent = (req, res) => {
   Student.findOne({ email: req.body.email }).exec((err, student) => {
     if (student) {
       return res.status(400).json({
@@ -111,8 +118,12 @@ const updateStudent = (req, res) => {
     });
 };
 
+const deleteStudent = (req, res) => {};
+
 module.exports = {
   getStudents,
-  enroll,
+  enrollStudent,
   updateStudent,
+  getStudent,
+  deleteStudent,
 };
