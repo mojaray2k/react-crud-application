@@ -118,7 +118,12 @@ const updateStudent = (req, res) => {
     });
 };
 
-const deleteStudent = (req, res) => {};
+const deleteStudent = (req, res) => {
+  Student.findByIdAndRemove(req.params.id, function (err) {
+    if (err) return next(err);
+    res.send("Deleted successfully!");
+  });
+};
 
 module.exports = {
   getStudents,
