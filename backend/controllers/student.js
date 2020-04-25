@@ -85,9 +85,9 @@ const updateStudent = (req, res) => {
     });
   }
   Student.findByIdAndUpdate(
-    req.params.studentId,
+    req.params.id,
     {
-      body: req.body,
+      $set: req.body,
     },
     { new: true }
   )

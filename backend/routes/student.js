@@ -11,6 +11,6 @@ const {
 
 router.get("/students", getStudents);
 router.post("/students", enroll);
-router.put("/students/:studentId", updateStudent);
+router.put("/students/:id", updateStudent);
 
 module.exports = router;
