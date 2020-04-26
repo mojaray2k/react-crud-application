@@ -11,7 +11,8 @@ const getStudents = async (req, res) => {
     _id 
     fname 
     lname 
-    email 
+    email
+    profile
     phone
     street1
     street2
