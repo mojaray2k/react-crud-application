@@ -51,7 +51,7 @@ class App extends Component {
 
   render() {
     return (
-      <div className="App">
+      <Container fluid={true} className="App">
         <Row>
           <Col>
             <h1 style={{ margin: "20px 0" }}>CRUD Database</h1>
@@ -83,7 +83,7 @@ class App extends Component {
             />
           </Col>
         </Row>
-      </div>
+      </Container>
     );
   }
 }
