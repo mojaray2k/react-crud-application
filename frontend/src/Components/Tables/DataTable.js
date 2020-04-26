@@ -6,17 +6,11 @@ class DataTable extends Component {
   deleteItem = (id) => {
     let confirmDelete = window.confirm("Delete item forever?");
     if (confirmDelete) {
-      fetch("http://localhost:8096/api/students", {
-        method: "delete",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          id,
-        }),
+      fetch(`http://localhost:8096/api/students/${id}`, {
+        method: "DELETE",
       })
         .then((response) => response.json())
-        .then((item) => {
+        .then(() => {
           this.props.deleteItemFromState(id);
         })
         .catch((err) => console.log(err));
@@ -44,7 +38,7 @@ class DataTable extends Component {
                 item={item}
                 updateState={this.props.updateState}
               />{" "}
-              <Button color="danger" onClick={() => this.deleteItem(item.id)}>
+              <Button color="danger" onClick={() => this.deleteItem(item._id)}>
                 Del
               </Button>
             </div>
@@ -66,7 +60,8 @@ class DataTable extends Component {
             <th>City</th>
             <th>State</th>
             <th>Zip</th>
-            <th>GPA</th>
+            {/* <th>GPA</th> */}
+            <th>Edit/Delete</th>
           </tr>
         </thead>
         <tbody>{items}</tbody>

@@ -3,7 +3,6 @@ import { Button, Form, FormGroup, Label, Input } from "reactstrap";
 
 class AddEditForm extends React.Component {
   state = {
-    id: "",
     fname: "",
     lname: "",
     email: "",
@@ -23,7 +22,7 @@ class AddEditForm extends React.Component {
   submitFormAdd = (e) => {
     e.preventDefault();
     fetch("http://localhost:8096/api/students", {
-      method: "post",
+      method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
@@ -42,8 +41,8 @@ class AddEditForm extends React.Component {
     })
       .then((response) => response.json())
       .then((item) => {
-        if (Array.isArray(item)) {
-          this.props.addItemToState(item[0]);
+        if (item) {
+          this.props.addItemToState(item);
           this.props.toggle();
         } else {
           console.log("failure");
@@ -54,30 +53,18 @@ class AddEditForm extends React.Component {
 
   submitFormEdit = (e) => {
     e.preventDefault();
-    fetch(`http://localhost:8096/api/students/`, {
-      method: "put",
+    const { item } = this.props;
+    fetch(`http://localhost:8096/api/students/${item._id}`, {
+      method: "PUT",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({
-        id: this.state.id,
-        fname: this.state.fname,
-        lname: this.state.lname,
-        email: this.state.email,
-        phone: this.state.phone,
-        street1: this.state.street1,
-        street2: this.state.street2,
-        city: this.state.city,
-        state: this.state.state,
-        zip: this.state.zip,
-        gpa: this.state.gpa,
-      }),
+      body: JSON.stringify(this.state),
     })
       .then((response) => response.json())
       .then((item) => {
-        if (Array.isArray(item)) {
-          // console.log(item[0])
-          this.props.updateState(item[0]);
+        if (item) {
+          this.props.updateState(item);
           this.props.toggle();
         } else {
           console.log("failure");

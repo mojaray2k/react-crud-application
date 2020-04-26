@@ -70,15 +70,13 @@ const enrollStudent = (req, res) => {
       state,
       zip,
     });
-    newStudent.save((err, success) => {
+    newStudent.save((err, resp) => {
       if (err) {
         return res.status(400).json({
           error: err,
         });
       }
-      res.json({
-        student: success,
-      });
+      res.json(resp);
     });
   });
 };
@@ -119,8 +117,8 @@ const updateStudent = (req, res) => {
 
 const deleteStudent = (req, res) => {
   Student.findByIdAndRemove(req.params.id, function (err) {
-    if (err) return next(err);
-    res.send("Deleted successfully!");
+    if (err) return res.status(500).send(err);
+    res.send({ success: "Deleted successfully!" });
   });
 };
 

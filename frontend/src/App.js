@@ -3,6 +3,7 @@ import { Container, Row, Col } from "reactstrap";
 import ModalForm from "./Components/Modals/Modal";
 import DataTable from "./Components/Tables/DataTable";
 import { CSVLink } from "react-csv";
+import "./App.css";
 
 class App extends Component {
   state = {
@@ -23,7 +24,10 @@ class App extends Component {
   };
 
   updateState = (item) => {
-    const itemIndex = this.state.items.findIndex((data) => data.id === item.id);
+    const itemIndex = this.state.items.findIndex(
+      (data) => data._id === item._id
+    );
+    console.log("itemindexxx", itemIndex);
     const newArray = [
       // destructure all items from beginning to the indexed item
       ...this.state.items.slice(0, itemIndex),
@@ -36,7 +40,8 @@ class App extends Component {
   };
 
   deleteItemFromState = (id) => {
-    const updatedItems = this.state.items.filter((item) => item.id !== id);
+    const { items } = this.state;
+    const updatedItems = items.filter((item) => item._id !== id);
     this.setState({ items: updatedItems });
   };
 
@@ -46,7 +51,7 @@ class App extends Component {
 
   render() {
     return (
-      <Container className="App">
+      <div className="App">
         <Row>
           <Col>
             <h1 style={{ margin: "20px 0" }}>CRUD Database</h1>
@@ -78,7 +83,7 @@ class App extends Component {
             />
           </Col>
         </Row>
-      </Container>
+      </div>
     );
   }
 }
