@@ -55,8 +55,8 @@ const studentSchema = new mongoose.Schema(
       required: true,
     },
     gpa: {
-      type: mongoose.Decimal128,
-      default: 0,
+      // type: mongoose.Decimal128,
+      type: String,
     },
     history: {
       type: Array,

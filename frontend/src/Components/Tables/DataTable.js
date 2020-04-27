@@ -30,7 +30,7 @@ class DataTable extends Component {
           <td>{item.city}</td>
           <td>{item.state}</td>
           <td>{item.zip}</td>
-          {/* <td>{item.gpa}</td> */}
+          <td>{item.gpa}</td>
           <td>
             <div style={{ width: "110px" }}>
               <ModalForm
@@ -60,7 +60,7 @@ class DataTable extends Component {
             <th>City</th>
             <th>State</th>
             <th>Zip</th>
-            {/* <th>GPA</th> */}
+            <th>GPA</th>
             <th>Edit/Delete</th>
           </tr>
         </thead>

@@ -6,7 +6,7 @@ const Home = () => {
     <React.Fragment>
       <h1>Student Enrollment Form</h1>
       <AddEditForm />
-      <style jsx>{`
+      <style jsx="true">{`
         form {
           text-align: left;
           width: 50%;

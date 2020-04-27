@@ -24,7 +24,6 @@ class Database extends Component {
     const itemIndex = this.state.items.findIndex(
       (data) => data._id === item._id
     );
-    console.log("itemindexxx", itemIndex);
     const newArray = [
       // destructure all items from beginning to the indexed item
       ...this.state.items.slice(0, itemIndex),

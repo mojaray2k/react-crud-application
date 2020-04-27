@@ -1,5 +1,7 @@
 import React from "react";
 import { Button, Form, FormGroup, Label, Input } from "reactstrap";
+import { connect } from "react-redux";
+import { postNewStudent } from "../../Redux/action";
 
 class AddEditForm extends React.Component {
   state = {
@@ -21,34 +23,30 @@ class AddEditForm extends React.Component {
 
   submitFormAdd = (e) => {
     e.preventDefault();
-    fetch("http://localhost:8096/api/students", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        fname: this.state.fname,
-        lname: this.state.lname,
-        email: this.state.email,
-        phone: this.state.phone,
-        street1: this.state.street1,
-        street2: this.state.street2,
-        city: this.state.city,
-        state: this.state.state,
-        zip: this.state.zip,
-        gpa: this.state.gpa,
-      }),
-    })
-      .then((response) => response.json())
-      .then((item) => {
-        if (item) {
-          this.props.addItemToState(item);
-          this.props.toggle();
-        } else {
-          console.log("failure");
-        }
-      })
-      .catch((err) => console.log(err));
+    const {
+      fname,
+      lname,
+      email,
+      phone,
+      street1,
+      street2,
+      city,
+      state,
+      zip,
+      gpa,
+    } = this.state;
+    this.props.postNewStudent({
+      fname,
+      lname,
+      email,
+      phone,
+      street1,
+      street2,
+      city,
+      state,
+      zip,
+      gpa,
+    });
     this.setState({
       fname: "",
       lname: "",
@@ -61,6 +59,7 @@ class AddEditForm extends React.Component {
       zip: null,
       gpa: null,
     });
+    this.props.toggle();
   };
 
   submitFormEdit = (e) => {
@@ -228,4 +227,10 @@ class AddEditForm extends React.Component {
   }
 }
 
-export default AddEditForm;
+const mapDispatchToProps = (dispatch) => {
+  return {
+    postNewStudent: (student) => dispatch(postNewStudent(student)),
+  };
+};
+
+export default connect(null, mapDispatchToProps)(AddEditForm);

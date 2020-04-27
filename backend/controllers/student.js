@@ -20,6 +20,7 @@ const getStudents = async (req, res) => {
     state
     zip
     studentId
+    gpa
     createdAt 
     updatedAt
   `);
