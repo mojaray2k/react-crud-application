@@ -10,4 +10,5 @@
    2. You can click on a link to go to an indivial student profile page
 3. There are Profile pages for Individual Students
 4. Uses **React Router**
-5. There is a Redux version just switch to the `redux` branch. 
+5. There is a **Redux** version just switch to the `redux` branch. 
+6. There is a **Hooks**  version just switch to the `hooks` branch. 
