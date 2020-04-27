@@ -1,88 +1,24 @@
 import React, { Component } from "react";
-import { Container, Row, Col } from "reactstrap";
-import ModalForm from "./Components/Modals/Modal";
-import DataTable from "./Components/Tables/DataTable";
-import { CSVLink } from "react-csv";
+import { Container } from "reactstrap";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import Navbar from "./Components/Navigation/Navbar";
+import Home from "./pages/Home";
+import Database from "./pages/Database";
 import "./App.css";
 
 class App extends Component {
-  state = {
-    items: [],
-  };
-
-  getItems() {
-    fetch("http://localhost:8096/api/students")
-      .then((response) => response.json())
-      .then((items) => this.setState({ items }))
-      .catch((err) => console.log(err));
-  }
-
-  addItemToState = (item) => {
-    this.setState((prevState) => ({
-      items: [...prevState.items, item],
-    }));
-  };
-
-  updateState = (item) => {
-    const itemIndex = this.state.items.findIndex(
-      (data) => data._id === item._id
-    );
-    console.log("itemindexxx", itemIndex);
-    const newArray = [
-      // destructure all items from beginning to the indexed item
-      ...this.state.items.slice(0, itemIndex),
-      // add the updated item to the array
-      item,
-      // add the rest of the items to the array from the index after the replaced item
-      ...this.state.items.slice(itemIndex + 1),
-    ];
-    this.setState({ items: newArray });
-  };
-
-  deleteItemFromState = (id) => {
-    const { items } = this.state;
-    const updatedItems = items.filter((item) => item._id !== id);
-    this.setState({ items: updatedItems });
-  };
-
-  componentDidMount() {
-    this.getItems();
-  }
-
   render() {
     return (
       <Container fluid={true} className="App">
-        <Row>
-          <Col>
-            <h1 style={{ margin: "20px 0" }}>CRUD Database</h1>
-          </Col>
-        </Row>
-        <Row>
-          <Col>
-            <DataTable
-              items={this.state.items}
-              updateState={this.updateState}
-              deleteItemFromState={this.deleteItemFromState}
-            />
-          </Col>
-        </Row>
-        <Row>
-          <Col>
-            <CSVLink
-              filename={"db.csv"}
-              color="primary"
-              style={{ float: "left", marginRight: "10px" }}
-              className="btn btn-primary"
-              data={this.state.items}
-            >
-              Download CSV
-            </CSVLink>
-            <ModalForm
-              buttonLabel="Add Item"
-              addItemToState={this.addItemToState}
-            />
-          </Col>
-        </Row>
+        <Router>
+          <Navbar />
+          {/* A <Switch> looks through its children <Route>s and
+            renders the first one that matches the current URL. */}
+          <Switch>
+            <Route exact path="/" component={Home} />
+            <Route path="/database" component={Database} />
+          </Switch>
+        </Router>
       </Container>
     );
   }

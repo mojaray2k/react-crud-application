@@ -49,6 +49,18 @@ class AddEditForm extends React.Component {
         }
       })
       .catch((err) => console.log(err));
+    this.setState({
+      fname: "",
+      lname: "",
+      email: "",
+      phone: "",
+      street1: "",
+      street2: "",
+      city: "",
+      state: "",
+      zip: null,
+      gpa: null,
+    });
   };
 
   submitFormEdit = (e) => {
