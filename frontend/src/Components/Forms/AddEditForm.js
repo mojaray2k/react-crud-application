@@ -59,7 +59,6 @@ class AddEditForm extends React.Component {
       zip: null,
       gpa: null,
     });
-    this.props.toggle();
   };
 
   submitFormEdit = (e) => {
