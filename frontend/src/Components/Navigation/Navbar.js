@@ -2,8 +2,6 @@ import React, { Component } from "react";
 import { NavbarBrand } from "reactstrap";
 import { NavLink } from "react-router-dom";
 
-import DataTable from "../Tables/DataTable";
-
 export default class Navbar extends Component {
   constructor(props) {
     super(props);

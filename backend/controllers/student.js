@@ -71,13 +71,13 @@ const enrollStudent = (req, res) => {
       state,
       zip,
     });
-    newStudent.save((err, resp) => {
+    newStudent.save((err, res) => {
       if (err) {
         return res.status(400).json({
           error: err,
         });
       }
-      res.json(resp);
+      res.json(res);
     });
   });
 };
